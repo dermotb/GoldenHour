@@ -63,9 +63,13 @@ namespace GoldenHour
 
 		private async void AddCurrentLocationData()
 		{
-			Geoposition current = await geolocator.GetGeopositionAsync();
-			displayPosition(current.Coordinate.Latitude, current.Coordinate.Longitude, true);
-			accuracy.Text = current.Coordinate.Accuracy.ToString();
+            if (geolocator.LocationStatus == PositionStatus.Ready)
+            {
+                Geoposition current = await geolocator.GetGeopositionAsync();
+
+                displayPosition(current.Coordinate.Latitude, current.Coordinate.Longitude, true);
+                accuracy.Text = current.Coordinate.Accuracy.ToString();
+            }
 		}
 
 		private void map_RightTapped_1(object sender, RightTappedRoutedEventArgs e)
