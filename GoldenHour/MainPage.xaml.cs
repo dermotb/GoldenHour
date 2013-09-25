@@ -32,12 +32,11 @@ namespace GoldenHour
 		bool usingCurrentPosition = true;
 		Geolocator geolocator;
 		LocationIcon locationIcon;
+        Location currentLocation;
 
 	    public MainPage()
         {
 			this.InitializeComponent();
-
-
 			DatePicker.Tapped += DatePicker_Tapped;
 
 			geolocator = new Geolocator();
@@ -45,32 +44,35 @@ namespace GoldenHour
 
 			// Add the location icon to map layer so that we can position it.
 			map.Children.Add(locationIcon);
-			AddCurrentLocationData();
+			GetCurrentLocation();
+            //AddLocationData();
         }
 
 		void DatePicker_Tapped(object sender, TappedRoutedEventArgs e)
 		{
 			var x = DatePicker.SelectedDate;
-			AddCurrentLocationData();
+			AddLocationData(false);
 		}
 
 
 		public void ChangeDate()
 		{
-			AddCurrentLocationData();
+			AddLocationData(false);
 
 		}
 
-		private async void AddCurrentLocationData()
+		private async void GetCurrentLocation()
 		{
-            if (geolocator.LocationStatus == PositionStatus.Ready)
-            {
-                Geoposition current = await geolocator.GetGeopositionAsync();
-
-                displayPosition(current.Coordinate.Latitude, current.Coordinate.Longitude, true);
-                accuracy.Text = current.Coordinate.Accuracy.ToString();
-            }
+			Geoposition current = await geolocator.GetGeopositionAsync();
+            //accuracy.Text = current.Coordinate.Accuracy.ToString();
+            currentLocation = new Location(current.Coordinate.Latitude, current.Coordinate.Longitude);
+            AddLocationData(true);
 		}
+
+        private void AddLocationData(bool home)
+        {
+            displayPosition(currentLocation.Latitude, currentLocation.Longitude, true);
+        }
 
 		private void map_RightTapped_1(object sender, RightTappedRoutedEventArgs e)
 		{
@@ -81,6 +83,7 @@ namespace GoldenHour
 			if (succeeded)
 			{
 				displayPosition(location.Latitude, location.Longitude, false);
+                currentLocation = location;
 			}
 		}
 
@@ -145,7 +148,7 @@ namespace GoldenHour
 
 		private void CurrentCalc_Click(object sender, RoutedEventArgs e)
 		{
-			AddCurrentLocationData();
+            GetCurrentLocation();
 		}
 
         /// <summary>
@@ -159,6 +162,20 @@ namespace GoldenHour
         /// session.  This will be null the first time a page is visited.</param>
         protected override void LoadState(Object navigationParameter, Dictionary<String, Object> pageState)
         {
+
+        }
+
+        private void map_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
+        {
+            			usingCurrentPosition = false;
+			Location location = new Location();
+            bool succeeded = map.TryPixelToLocation(e.GetCurrentPoint(this.map).Position, out location);
+
+			if (succeeded)
+			{
+				displayPosition(location.Latitude, location.Longitude, false);
+                currentLocation = location;
+			}
 
         }
 
