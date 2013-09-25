@@ -28,62 +28,89 @@
 		<Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Name="InfoGrid" Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
 				<ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-			<Grid Grid.Column="1" Margin="10,20,10,10">
-				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto"/>
-					<RowDefinition Height="Auto"/>
-				</Grid.RowDefinitions>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-					<ColumnDefinition Width="Auto"/>
-				</Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
 
-				<StackPanel Grid.Row="0">
-					<TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" IsHitTestVisible="false" Style="{StaticResource PageHeaderTextStyle}"/>
-					<TextBlock x:Name="status" Text="" IsHitTestVisible="false" Foreground="Yellow" FontSize="15" FontWeight="Normal"/>
-				</StackPanel>
-				<StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-					<TextBox Text="{Binding ElementName=DatePicker, Path=SelectedDate, Converter={StaticResource ShortDateConverter}, Mode=OneWay}" IsEnabled="False" Width="200" Margin="20"/>
-					<c:DateSpinner x:Name="DatePicker" Width="600" Height="100"/>
-				</StackPanel>
-			</Grid>
+            <StackPanel Margin="10,10,0,0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Stretch" Height="Auto">
+                <TextBlock x:Name="pageTitle" Text="{StaticResource AppName}" IsHitTestVisible="false" Style="{StaticResource PageHeaderTextStyle}"/>
+            </StackPanel>
+
+            <StackPanel Margin="10,20,0,0" Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Stretch" Height="Auto">
+                <TextBlock Text="{Binding ElementName=DatePicker, Path=SelectedDate, Converter={StaticResource ShortDateConverter}, Mode=OneWay}" FontSize="30"/>
+            </StackPanel>
+
+            <StackPanel  Margin="10,0,0,0" Grid.Row="2" Orientation="Horizontal">
+                <TextBlock x:Name="latTitle" Text="Lat:" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="30"/>
+                <TextBlock Margin="10,0,0,0" x:Name="latText" Text="-------" TextAlignment="Left" IsHitTestVisible="false"  Foreground="WhiteSmoke" FontSize="30"/>
+                <TextBlock  Margin="10,0,0,0" x:Name="longTitle" Text="Long:" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="30"/>
+                <TextBlock  Margin="10,0,0,0" x:Name="longText" Text="-------" TextAlignment="Left" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="30" />
+            </StackPanel>
+
+
+            <StackPanel Margin="0,20,0,0" Grid.Row="1" Grid.Column="2" Orientation="Vertical">
+                <TextBlock Margin="0,0,0,0" x:Name="srTitle" Text="Sun rises:" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="30"/>
+            </StackPanel>
+
+            <StackPanel Margin="0,0,0,0" Grid.Row="2" Grid.Column="2" Orientation="Vertical">
+                <TextBlock x:Name="sunRise" Text="999" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="30"/>
+            </StackPanel>
+
+            <StackPanel  Margin="0,20,0,0" Grid.Row="1" Grid.Column="3" Orientation="Vertical">
+                <TextBlock Margin="0,0,0,0" x:Name="ssTitle" Text="Sun sets:" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="30"/>
+            </StackPanel>
+
+            <StackPanel  Margin="0,0,0,0" Grid.Row="2" Grid.Column="3" Orientation="Vertical">
+                <TextBlock x:Name="sunSet" Text="999" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="30" />
+            </StackPanel>
         </Grid>
 
-		<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Grid.Row="2" Margin="0, 20, 0,0">
-			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="400" />
-			</Grid.ColumnDefinitions>
-			<Grid Grid.Column="1">
-				<StackPanel>
-					<TextBlock x:Name="accTitle" Text="Location accuracy (metres):" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold"/>
-					<TextBlock x:Name="accuracy" Text="999" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20"/>
-					<TextBlock Margin="0,10,0,0" x:Name="locTitle" Text="Location:" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold"/>
-					<TextBlock x:Name="latText" Text="999" TextAlignment="Left" IsHitTestVisible="false"  Foreground="WhiteSmoke" FontSize="20"/>
-					<TextBlock x:Name="longText" Text="999" TextAlignment="Left" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20" />
-					<TextBlock Margin="0,10,0,0" x:Name="srTitle" Text="Sunrise" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold"/>
-					<TextBlock x:Name="sunRise" Text="999" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20"/>
-					<TextBlock Margin="0,10,0,0" x:Name="ssTitle" Text="Sunset" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold"/>
-					<TextBlock x:Name="sunSet" Text="999" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20" />
-					<Button Content="Reset Location" HorizontalAlignment="Left" Margin="0,0,0,0" Click="CurrentCalc_Click"/>
-				</StackPanel>
-	
-			</Grid>
-			<Grid x:Name="mapParent" Grid.Column="0">
-				<bm:Map x:Name="map"  Credentials="AnjGi7VxPGjgcCSQ_Y68JePAkmxdfjlFB3GfsJNRzmRxA-WeATMqUrUSJ8iG4C84"  RightTapped="map_RightTapped_1" PointerPressedOverride="map_PointerPressedOverride"/>
-			</Grid>
-		</Grid>
+        <Grid Margin="0,20,0,0" Grid.Row="1" x:Name="mapParent" Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+            <Button x:Name="MapLocationButton" Content="Map Current Location" HorizontalAlignment="Left" Margin="29,31,1157,0" VerticalAlignment="Top" Click="CurrentCalc_Click" Height="38"/>
+                <bm:Map Margin="0,80,0,-300" x:Name="map" Grid.Row="1" Credentials="AnjGi7VxPGjgcCSQ_Y68JePAkmxdfjlFB3GfsJNRzmRxA-WeATMqUrUSJ8iG4C84"  RightTapped="map_RightTapped_1" PointerPressedOverride="map_PointerPressedOverride"/>
+        </Grid>
 
-		<VisualStateManager.VisualStateGroups>
+<!--        <Grid Margin="0,60,0,0" Grid.Row="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock x:Name="accTitle" Text="Accuracy(m):" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20" FontWeight="Bold"/>
+                <TextBlock x:Name="accuracy" Text="999" IsHitTestVisible="false" Foreground="WhiteSmoke" FontSize="20"/>
+            </StackPanel>-->
+            <StackPanel  Grid.Row="3" Grid.Column="1" Orientation="Vertical">
+                <c:DateSpinner x:Name="DatePicker" Width="600" Height="100"/>
+        </StackPanel>
+        <StackPanel  Grid.Row="4" Grid.Column="1">
+            <TextBlock x:Name="status" Text="status string" IsHitTestVisible="false" Foreground="Yellow" FontSize="20" FontWeight="Normal"/>
+        </StackPanel>
+        <!--</Grid>-->
+
+    
+        
+
+        <VisualStateManager.VisualStateGroups>
 
             <!-- Visual states reflect the application's view state -->
             <VisualStateGroup x:Name="ApplicationViewStates">

@@ -45,7 +45,6 @@ namespace GoldenHour
 			// Add the location icon to map layer so that we can position it.
 			map.Children.Add(locationIcon);
 			GetCurrentLocation();
-            //AddLocationData();
         }
 
 		void DatePicker_Tapped(object sender, TappedRoutedEventArgs e)
@@ -54,8 +53,7 @@ namespace GoldenHour
 			AddLocationData(false);
 		}
 
-
-		public void ChangeDate()
+        public void ChangeDate()
 		{
 			AddLocationData(false);
 
@@ -63,15 +61,29 @@ namespace GoldenHour
 
 		private async void GetCurrentLocation()
 		{
-			Geoposition current = await geolocator.GetGeopositionAsync();
-            //accuracy.Text = current.Coordinate.Accuracy.ToString();
-            currentLocation = new Location(current.Coordinate.Latitude, current.Coordinate.Longitude);
-            AddLocationData(true);
+            if (geolocator.LocationStatus == PositionStatus.Ready)
+            {
+                Geoposition current = await geolocator.GetGeopositionAsync();
+                status.Text = string.Format("Accuracy (m): {0}",current.Coordinate.Accuracy.ToString());
+                currentLocation = new Location(current.Coordinate.Latitude, current.Coordinate.Longitude);
+                AddLocationData(true);
+            }
+            else
+            {
+                status.Text = "Failed to find your current location";
+            }
 		}
 
         private void AddLocationData(bool home)
         {
-            displayPosition(currentLocation.Latitude, currentLocation.Longitude, true);
+            if (currentLocation != null)
+            {
+                displayPosition(currentLocation.Latitude, currentLocation.Longitude, home);
+            }
+            else
+            {
+                status.Text = "Location resolution failure";
+            }
         }
 
 		private void map_RightTapped_1(object sender, RightTappedRoutedEventArgs e)
@@ -98,6 +110,7 @@ namespace GoldenHour
 			}
 
 			DisplaySunData(location);
+            status.Text = "";
 	
 		}
 
