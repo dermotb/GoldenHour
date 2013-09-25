@@ -52,7 +52,7 @@
 					<TextBlock x:Name="status" Text="" IsHitTestVisible="false" Foreground="Yellow" FontSize="15" FontWeight="Normal"/>
 				</StackPanel>
 				<StackPanel  Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-					<TextBox Text="{Binding ElementName=DatePicker, Path=SelectedDate, Converter={StaticResource ShortDateConverter}, Mode=TwoWay}" Width="200" Margin="20"/>
+					<TextBox Text="{Binding ElementName=DatePicker, Path=SelectedDate, Converter={StaticResource ShortDateConverter}, Mode=OneWay}" IsEnabled="False" Width="200" Margin="20"/>
 					<c:DateSpinner x:Name="DatePicker" Width="600" Height="100"/>
 				</StackPanel>
 			</Grid>
@@ -79,7 +79,7 @@
 	
 			</Grid>
 			<Grid x:Name="mapParent" Grid.Column="0">
-				<bm:Map x:Name="map"  Credentials="AnjGi7VxPGjgcCSQ_Y68JePAkmxdfjlFB3GfsJNRzmRxA-WeATMqUrUSJ8iG4C84"  RightTapped="map_RightTapped_1"/>
+				<bm:Map x:Name="map"  Credentials="AnjGi7VxPGjgcCSQ_Y68JePAkmxdfjlFB3GfsJNRzmRxA-WeATMqUrUSJ8iG4C84"  RightTapped="map_RightTapped_1" PointerPressedOverride="map_PointerPressedOverride"/>
 			</Grid>
 		</Grid>
 
