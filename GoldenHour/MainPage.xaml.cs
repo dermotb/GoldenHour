@@ -116,8 +116,8 @@ namespace GoldenHour
 
 		private void DisplaySunData(Location location)
 		{
-			latText.Text = location.Latitude.ToString();
-			longText.Text = location.Longitude.ToString();
+			latText.Text = string.Format("{0}{1}{2}", location.Latitude.ToString("000.000;000.000"), "\u00B0", location.Latitude > 0 ? "N":"S");
+            longText.Text = string.Format("{0}{1}{2}", location.Longitude.ToString("000.000;000.000"), "\u00B0", location.Longitude > 0 ? "E" : "W");
 
 			DateTime date = DatePicker.SelectedDate; //DateTime.Today;
 			bool isSunrise = false;
