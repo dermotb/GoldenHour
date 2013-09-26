@@ -130,8 +130,8 @@ namespace GoldenHour
 
 			SunTimes.Instance.CalculateSunRiseSetTimes(location.Latitude, location.Longitude, date, ref sunrise, ref sunset, ref isSunrise, ref isSunset);
 
-			sunRise.Text = sunrise.ToLocalTime().TimeOfDay.ToString();
-			sunSet.Text = sunset.ToLocalTime().TimeOfDay.ToString();
+			sunRise.Text = string.Format("{0}:{1}", sunrise.ToLocalTime().TimeOfDay.Hours.ToString("00"), sunrise.ToLocalTime().TimeOfDay.Minutes.ToString("00"));
+			sunSet.Text = string.Format("{0}:{1}",sunset.ToLocalTime().TimeOfDay.Hours.ToString("00"), sunset.ToLocalTime().TimeOfDay.Minutes.ToString("00"));
 		}
 
 		private SunTimes.LatitudeCoords DecimalLatToDegreesLat(double lat)
