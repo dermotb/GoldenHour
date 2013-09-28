@@ -61,14 +61,14 @@ namespace GoldenHour
 
 		private async void GetCurrentLocation()
 		{
-            if (geolocator.LocationStatus == PositionStatus.Ready)
+            try
             {
                 Geoposition current = await geolocator.GetGeopositionAsync();
                 status.Text = string.Format("Accuracy (m): {0}",current.Coordinate.Accuracy.ToString());
                 currentLocation = new Location(current.Coordinate.Latitude, current.Coordinate.Longitude);
                 AddLocationData(true);
             }
-            else
+            catch (Exception e)
             {
                 status.Text = "Failed to find your current location";
             }
