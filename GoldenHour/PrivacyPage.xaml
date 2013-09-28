@@ -1,5 +1,5 @@
 ﻿<UserControl
-    x:Class="GoldenHour.PrivacyPage"
+    x:Class="Sunriser.PrivacyPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:W8Tides"
@@ -35,8 +35,8 @@
 				<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0,0,0,-160">
 					<Grid Margin="40,33,40,39" VerticalAlignment="Top" Grid.RowSpan="3">
 						<StackPanel>
-							<TextBlock Margin="9,0,0,0" x:Name="Para1" Text="This Privacy Policy covers your use of this application. Irish Tides does not collect, store or share any personal information and does not monitor any statistics, trends or user behaviours." TextWrapping="Wrap" Foreground="Navy" FontSize="18"/>
-							<TextBlock Margin="9,10,0,0" x:Name="Para2" Text="The application implements the share charm, allowing you to share tide height and time data using share client applications like e-mail." TextWrapping="Wrap" Foreground="Navy" FontSize="18"/>
+							<TextBlock Margin="9,0,0,0" x:Name="Para1" Text="This Privacy Policy covers your use of this application. Sunriser does not collect, store or share any personal information and does not monitor any statistics, trends or user behaviours." TextWrapping="Wrap" Foreground="Navy" FontSize="18"/>
+							<TextBlock Margin="9,10,0,0" x:Name="Para2" Text="The application uses the location capabilities of your device and the Bing maps service to display locations." TextWrapping="Wrap" Foreground="Navy" FontSize="18"/>
 						</StackPanel>
 					</Grid>
 				</ScrollViewer>

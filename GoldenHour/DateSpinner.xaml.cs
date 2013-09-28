@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Media.Media3D;
 using Windows.UI.Xaml.Navigation;
 
-namespace GoldenHour.Common
+namespace Sunriser.Common
 {
     public sealed partial class DateSpinner : UserControl
     {

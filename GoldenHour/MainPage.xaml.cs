@@ -1,5 +1,5 @@
 ﻿using Bing.Maps;
-using GoldenHour.Data;
+using Sunriser.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,13 +23,13 @@ using Windows.UI.Xaml.Navigation;
 
 // The Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234233
 
-namespace GoldenHour
+namespace Sunriser
 {
     /// <summary>
     /// A page that displays a collection of item previews.  In the Split Application this page
     /// is used to display and select one of the available groups.
     /// </summary>
-    public sealed partial class MainPage : GoldenHour.Common.LayoutAwarePage
+    public sealed partial class MainPage : Sunriser.Common.LayoutAwarePage
     {
 		bool usingCurrentPosition = true;
 		Geolocator geolocator;
