@@ -31,7 +31,7 @@ namespace Sunriser
     /// </summary>
     public sealed partial class MainPage : Sunriser.Common.LayoutAwarePage
     {
-		bool usingCurrentPosition = true;
+//		bool usingCurrentPosition = true;
 		Geolocator geolocator;
 		LocationIcon locationIcon;
         Location currentLocation;
@@ -115,7 +115,7 @@ namespace Sunriser
                 currentLocation = new Location(current.Coordinate.Latitude, current.Coordinate.Longitude);
                 AddLocationData(true);
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
                 status.Text = "Failed to find your current location";
             }
@@ -135,7 +135,7 @@ namespace Sunriser
 
 		private void map_RightTapped_1(object sender, RightTappedRoutedEventArgs e)
 		{
-			usingCurrentPosition = false;
+			//usingCurrentPosition = false;
 			Location location = new Location();
 			bool succeeded = map.TryPixelToLocation(e.GetPosition(map), out location);
 
@@ -227,7 +227,7 @@ namespace Sunriser
 
         private void map_PointerPressedOverride(object sender, PointerRoutedEventArgs e)
         {
-            			usingCurrentPosition = false;
+            //usingCurrentPosition = false;
 			Location location = new Location();
             bool succeeded = map.TryPixelToLocation(e.GetCurrentPoint(this.map).Position, out location);
 

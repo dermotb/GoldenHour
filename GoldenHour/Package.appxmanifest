@@ -15,7 +15,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="GoldenHour.App">
-      <VisualElements DisplayName="GoldenHour" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="GoldenHour" ForegroundText="light" BackgroundColor="#464646">
+      <VisualElements DisplayName="GoldenHour" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="GoldenHour" ForegroundText="light" BackgroundColor="#464646" ToastCapable="false">
         <DefaultTile ShowName="allLogos" WideLogo="Assets\WideLogo.png" />
         <SplashScreen Image="Assets\SplashScreen.png" />
       </VisualElements>
