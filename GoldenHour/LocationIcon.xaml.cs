@@ -7,7 +7,7 @@
 
 using Windows.UI.Xaml.Controls;
 
-namespace GoldenHour
+namespace Sunriser
 {
     /// <summary>
     /// For displaying the location icon.

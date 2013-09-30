@@ -1,0 +1,54 @@
+﻿<UserControl
+    x:Class="Sunriser.AboutPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:W8Tides"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="450"
+    d:DesignWidth="400">
+    
+    <Grid>
+		<Border BorderBrush="#00b2f0" BorderThickness="1,0,0,0">
+			<Grid Background="White" VerticalAlignment="Stretch">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto"/>
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+
+				<!-- HEADER -->
+				<!--<Grid Background="#00b2f0" Grid.Row="0">-->
+				<Grid Background="#00b2f0" Grid.Row="0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+					<StackPanel Orientation="Horizontal" Grid.Column="0" Margin="40, 32, 17, 13">
+						<Button x:Name="BackButton" Margin="0,3,0,0" Style="{StaticResource BackButtonStyle}" Click="BackButton_Click"/>
+						<TextBlock Margin="10,10,0,0" FontFamily="Segoe UI" FontWeight="SemiLight" FontSize="24.6667" Text="About Sunriser" Foreground="White"/>
+					</StackPanel>
+					<Image Source="Assets/squareScale30x30.scale-100.png" Width="29" Height="29" Margin="353,46,17,21" />
+				</Grid>
+
+				<!-- CONTENT AREA -->
+				<ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0,0,0,-160">
+					<Grid Margin="40,33,40,39" VerticalAlignment="Top" Grid.RowSpan="3">
+						<StackPanel>
+							<TextBlock Margin="9,0,0,0" x:Name="DevTitle" TextWrapping="Wrap" Foreground="Navy" FontSize="20" FontWeight="Bold"  Text="Developed by DermotB"/>
+							<TextBlock Margin="9,0,0,0" x:Name="DevAbout" TextWrapping="Wrap" Foreground="Navy" FontSize="15" Text="This app has been developed as a hobby project and the first release is aimed at the App Hero competition (100+ downloads of this and the WP version may win me a tablet!)" />
+							<HyperlinkButton Foreground="Navy" NavigateUri="mailto:dermotb@hotmail.com" Height="38" Content="dermotb@hotmail.com"/>
+							<TextBlock Margin="9,30,0,0" x:Name="CreditTitle" TextWrapping="Wrap" Foreground="Navy" FontSize="20" FontWeight="Bold" Text="Plans"/>
+							<TextBlock Margin="9,0,0,0" x:Name="Credit1" TextWrapping="Wrap" Foreground="Navy" FontSize="15" Text="A Live tile feature will be added in the next update"/>
+							<!--<HyperlinkButton Foreground="Navy" NavigateUri="http://www.lightquake.com" Height="38" Content="http://www.lightquake.com"/>
+							<TextBlock Margin="9,30,0,0" x:Name="DisclaimerTitle" TextWrapping="Wrap" Foreground="Navy" FontSize="20" FontWeight="Bold" Text="Admiralty EasyTide"/>
+							<TextBlock Margin="9,0,0,0" x:Name="Disclaimer1" TextWrapping="Wrap" Foreground="Navy" FontSize="15" Text="This app uses predictions from the UK Admiralty EASYTIDE website. The 7 day tide service is provided free by the Hydrographic Office and the data is intended solely as a guide for leisure marine users. This 3rd party app consumes this data independently and has no connection or relationship with the data provider." />						
+							<HyperlinkButton Foreground="Navy" NavigateUri="http://easytide.ukho.gov.uk">http://easytide.ukho.gov.uk</HyperlinkButton>-->
+						</StackPanel>
+					</Grid>
+				</ScrollViewer>
+			</Grid>
+		</Border>
+
+	</Grid>
+</UserControl>

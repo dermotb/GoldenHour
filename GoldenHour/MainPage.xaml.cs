@@ -1,5 +1,5 @@
 ﻿using Bing.Maps;
-using GoldenHour.Data;
+using Sunriser.Data;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +8,7 @@ using Windows.Devices.Geolocation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
+using Windows.UI.ApplicationSettings;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -16,18 +17,19 @@ using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 
 // The Items Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234233
 
-namespace GoldenHour
+namespace Sunriser
 {
     /// <summary>
     /// A page that displays a collection of item previews.  In the Split Application this page
     /// is used to display and select one of the available groups.
     /// </summary>
-    public sealed partial class MainPage : GoldenHour.Common.LayoutAwarePage
+    public sealed partial class MainPage : Sunriser.Common.LayoutAwarePage
     {
 		bool usingCurrentPosition = true;
 		Geolocator geolocator;
@@ -37,6 +39,7 @@ namespace GoldenHour
 	    public MainPage()
         {
 			this.InitializeComponent();
+            SettingsPane.GetForCurrentView().CommandsRequested += GoldenHour_CommandsRequested;
 			DatePicker.Tapped += DatePicker_Tapped;
 
 			geolocator = new Geolocator();
@@ -45,6 +48,50 @@ namespace GoldenHour
 			// Add the location icon to map layer so that we can position it.
 			map.Children.Add(locationIcon);
 			GetCurrentLocation();
+        }
+
+        void GoldenHour_CommandsRequested(SettingsPane sender, SettingsPaneCommandsRequestedEventArgs args)
+        {
+            // Add an About command
+            SettingsCommand commandAbout = new SettingsCommand("about", "About This App", (x) =>
+            {
+                Popup popup = BuildSettingsItem(new AboutPage(), 346);
+                popup.IsOpen = true;
+            });
+
+            args.Request.ApplicationCommands.Add(commandAbout);
+
+            // Add an Privacy command
+            SettingsCommand commandPrivacy = new SettingsCommand("privacy", "Privacy Policy", (x) =>
+            {
+                Popup popup = BuildSettingsItem(new PrivacyPage(), 346);
+                popup.IsOpen = true;
+            }); 
+
+            args.Request.ApplicationCommands.Add(commandPrivacy);
+ 
+        }
+
+        private Popup BuildSettingsItem(UserControl u, int w)
+        {
+            Popup p = new Popup();
+            p.IsLightDismissEnabled = true;
+            p.ChildTransitions = new TransitionCollection();
+            p.ChildTransitions.Add(new PaneThemeTransition()
+            {
+                Edge = (SettingsPane.Edge == SettingsEdgeLocation.Right) ?
+                        EdgeTransitionLocation.Right :
+                        EdgeTransitionLocation.Left
+            });
+
+            u.Width = w;
+            u.Height = Window.Current.Bounds.Height;
+            p.Child = u;
+
+            p.SetValue(Canvas.LeftProperty, SettingsPane.Edge == SettingsEdgeLocation.Right ? (Window.Current.Bounds.Width - w) : 0);
+            p.SetValue(Canvas.TopProperty, 0);
+
+            return p;
         }
 
 		void DatePicker_Tapped(object sender, TappedRoutedEventArgs e)
@@ -61,14 +108,14 @@ namespace GoldenHour
 
 		private async void GetCurrentLocation()
 		{
-            if (geolocator.LocationStatus == PositionStatus.Ready)
+            try
             {
                 Geoposition current = await geolocator.GetGeopositionAsync();
                 status.Text = string.Format("Accuracy (m): {0}",current.Coordinate.Accuracy.ToString());
                 currentLocation = new Location(current.Coordinate.Latitude, current.Coordinate.Longitude);
                 AddLocationData(true);
             }
-            else
+            catch (Exception e)
             {
                 status.Text = "Failed to find your current location";
             }

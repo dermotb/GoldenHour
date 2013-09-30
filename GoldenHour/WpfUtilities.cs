@@ -1,4 +1,4 @@
-﻿using GoldenHour;
+﻿using Sunriser;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -9,7 +9,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media;
 
-namespace GoldenHour.Common
+namespace Sunriser.Common
 {
 
     public static class WpfUtilities

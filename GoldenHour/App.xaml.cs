@@ -1,4 +1,4 @@
-﻿using GoldenHour.Common;
+﻿using Sunriser.Common;
 
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Split App template is documented at http://go.microsoft.com/fwlink/?LinkId=234228
 
-namespace GoldenHour
+namespace Sunriser
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
